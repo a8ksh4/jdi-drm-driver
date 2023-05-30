@@ -35,7 +35,18 @@
 #include "ioctl_iface.h"
 #include "drm_iface.h"
 
-#define CMD_WRITE_LINE 0b10000000
+// JDI single line 1 bit:
+#define CMD_WRITE_LINE 0b10001000
+// JDI single line 3 bit:
+// #define CMD_WRITE_LINE 0b10000000
+// JDI single line 4 bit:
+// #define CMD_WRITE_LINE 0b10010000
+
+
+// Sharp single line:
+// #define CMD_WRITE_LINE 0b10000000
+
+// I think this is common to both displays
 #define CMD_CLEAR_SCREEN 0b00100000
 
 // Globals
@@ -119,9 +130,10 @@ static int sharp_memory_spi_clear_screen(struct sharp_memory_panel *panel)
 
 static inline u8 sharp_memory_reverse_byte(u8 b)
 {
-	b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
-	b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
-	b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+	// Distable bit reversal for JDI display
+	// b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+	// b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+	// b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
 	return b;
 }
 
@@ -240,6 +252,7 @@ static size_t sharp_memory_gray8_to_mono_tagged(u8 *buf, int width, int height, 
 
 		// Write the line number and trailer tags
 		buf[line * tagged_line_len] = sharp_memory_reverse_byte((u8)(y0 + 1)); // Indexed from 1
+		// buf[line * tagged_line_len] = (u8)(y0 + 1); // Indexed from 1
 		buf[(line * tagged_line_len) + tagged_line_len - 1] = 0;
 		y0++;
 	}
