@@ -2,6 +2,7 @@
 
 DRM kernel driver for 2.7" 400x240 JDI memory LCD panel.  This is an adaptation of the Sharp driver from Ardangelo.  This version does not work yet. TBD!!
 Tne JDI display is VERY similar to the sharp display, almost a drop in replacement.  Its ribbon cable is pin-compatible with the sharp display, and it has an extra ribboin cable for the backlight, which I have not tested yet.
+
 Rather than one bit per pixel like the sharp display, the JDI uses either 3 or 4 bits per pixel to support 3 bit color.  The 4-bit is for ease of programming, and the 3 bit might be a little faster.  I think we were seeing up to 30 fps on the sharp display, and this would max at 10fps if we are refreshing the entire screen.  
 
 ## Cleaning old drivers
