@@ -1,8 +1,10 @@
-# Sharp Memory LCD Kernel Driver
+# JDI Memory LCD Kernel Driver
 
-DRM kernel driver for 2.7" 400x240 Sharp memory LCD panel.
+DRM kernel driver for 2.7" 400x240 JDI memory LCD panel.  This is an adaptation of the Sharp driver from Ardangelo.  This version does not work yet. TBD!!
 
 ## Cleaning old drivers
+
+We will use "jdi-drm" as the module name.
 
 The `bbqX0kbd` driver has been renamed to `beepy-kbd`, and `sharp` to `sharp-drm`.
 
@@ -12,8 +14,10 @@ Remove the following files:
 
 * `/lib/modules/<uname>/extra/bbqX0kbd.ko*`
 * `/lib/modules/<uname>/extra/sharp.ko*`
+* `/lib/modules/<uname>/extra/sharp-drm.ko*`
 * `/boot/overlays/i2c-bbqX0kbd.dtbo`
 * `/boot/overlays/sharp.dtbo`
+* ... what else??
 
 Rebuild the module list:
 
@@ -50,10 +54,13 @@ To remove:
 
 ## References
 
-Original SPI and GPIO kernel driver at:
+Original SPI and GPIO kernel driver and the modified JDI version:
 
 	https://github.com/w4ilun/Sharp-Memory-LCD-Kernel-Driver
+ 	https://github.com/a8ksh4/JDI-LCD-Kernel-Driver
+  
 
-Sharp datasheet:
+Datasheets:
 
-	https://www.sharpsde.com/fileadmin/products/Displays/2016_SDE_App_Note_for_Memory_LCD_programming_V1.3.pdf
+	Sharp: https://www.sharpsde.com/fileadmin/products/Displays/2016_SDE_App_Note_for_Memory_LCD_programming_V1.3.pdf
+ 	JDI: 
